@@ -1,0 +1,21 @@
+x Issue with no CASCADE.ALL in the relationship between experience
+and Achievement table. Hence, adding an achievement was not
+automatically adding the experience to the exp.
+- Solved by adding CascadeType.ALL in the OneToMany parameter in the
+Experience entity.
+
+
+ x Issue with Achievement controller route not having
+ @RequestBody  annotation. Hence, the request body was not being
+parsed correctly. Resulting in null values being inserted into the DB.
+- Solved by adding the @RequestBody annotation to the controller route.
+
+
+x Issue with the  @ManyToOne  annotation in the Skill & SkillCategory entity.
+There was a circular reference between the two entities. Hence, the
+response had a stack overflow error (recusive call).
+- Solved by using @JsonManagedReference  and  @JsonBackReference  annotations.
+
+
+x Mormalizing the DB schema to reduce redundancy and improve performance
+uo to 4NF. 
