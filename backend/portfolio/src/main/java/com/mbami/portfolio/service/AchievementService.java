@@ -8,15 +8,20 @@ import org.springframework.stereotype.Service;
 
 import com.mbami.portfolio.model.Achievement;
 import com.mbami.portfolio.model.Experience;
+import com.mbami.portfolio.model.ExpRole;
+import com.mbami.portfolio.repository.ExpRoleRepository;
 import com.mbami.portfolio.repository.AchievementRepository;
 
 @Service
 public class AchievementService {
     private final AchievementRepository achievementRepository;
+    private final ExpRoleRepository expRoleRepository;
     
     @Autowired
-    public AchievementService(AchievementRepository achievementRepository) {
+    public AchievementService(AchievementRepository achievementRepository,
+            ExpRoleRepository expRoleRepository) {
         this.achievementRepository = achievementRepository;
+        this.expRoleRepository = expRoleRepository;
     }
 
     public List<Achievement> getAllAchievements() {
@@ -73,5 +78,25 @@ public class AchievementService {
     public List<Achievement> getAchievementsBySkillName(String skillName) {
         return achievementRepository.findBySkillName(skillName);
     } */
+   
+    public List<Achievement> getAchievementsByExpRole(long expRoleId) {
+        return expRoleRepository.findById(expRoleId).map(ExpRole::getExpRoleAchievements).orElse(null);
+    }
+
+    public List<Achievement> getAchievementsByExpRoleName(String expRoleName) {
+        return expRoleRepository.findByName(expRoleName).getExpRoleAchievements();
+    }
+
+    public List<Achievement> addAchievementsToExpRole(long expRoleId, List<Achievement> achievements) {
+        ExpRole expRole = expRoleRepository.findById(expRoleId).orElse(null);
+        if (expRole == null) {
+            return null;
+        }
+        for (Achievement achievement : achievements) {
+            achievement.setAchievementExpRole(expRole);
+        }
+
+        return achievementRepository.saveAll(achievements);
+    }
 
 }

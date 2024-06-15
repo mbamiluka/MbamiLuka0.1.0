@@ -78,4 +78,15 @@ public class AchievementController {
         return achievementService.getAchievementsBySkillName(name);
     } */
 
+    //------------------ROLE--------------------------------
+    @GetMapping("/role/{id}")
+    public List<Achievement> getAchievementsByRoleId(@PathVariable long id) {
+        return achievementService.getAchievementsByExpRole(id);
+    }
+
+    @PostMapping("/role/{id}")
+    public ResponseEntity<List<Achievement>> addAchievementsToRole(@PathVariable long id, @RequestBody List<Achievement> achievement) {
+        return ResponseEntity.ok(achievementService.addAchievementsToExpRole(id, achievement));
+    }
+
 }

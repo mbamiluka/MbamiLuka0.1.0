@@ -32,6 +32,9 @@ public class Achievement {
     @ManyToOne
     private Experience achievementExperience;
 
+    @ManyToOne
+    private ExpRole achievementExpRole;
+
     public Achievement() {
     }
 
@@ -115,6 +118,14 @@ public class Achievement {
 
     public void setAchievementExperience(Experience achievementExperience) {
         this.achievementExperience = achievementExperience;
+    }
+
+    public ExpRole getAchievementExpRole() {
+        return achievementExpRole;
+    }
+
+    public void setAchievementExpRole(ExpRole achievementExpRole) {
+        this.achievementExpRole = achievementExpRole;
     }
 
 }

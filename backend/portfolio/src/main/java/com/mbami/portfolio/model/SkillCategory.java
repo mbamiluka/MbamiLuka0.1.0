@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +24,8 @@ public class SkillCategory {
     private Long id;
     private String name;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "skillCategories")
+    ///@JsonBackReference
+    @ManyToMany(mappedBy = "skillCategories", cascade = CascadeType.ALL)
     private Set<Skill> categorySkills;
 
     public SkillCategory() {

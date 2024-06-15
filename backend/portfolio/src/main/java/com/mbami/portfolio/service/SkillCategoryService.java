@@ -34,6 +34,10 @@ public class SkillCategoryService {
         return skillCategoryRepository.save(skillCategory);
     }
 
+    public List<SkillCategory> addSkillCategories(List<SkillCategory> skillCategories) {
+        return skillCategoryRepository.saveAll(skillCategories);
+    }
+
     public SkillCategory updateSkillCategory(SkillCategory skillCategory) {
         return skillCategoryRepository.save(skillCategory);
     }
@@ -49,5 +53,54 @@ public class SkillCategoryService {
         }
 
         skillCategoryRepository.deleteById(id);
+    }
+
+    public SkillCategory addSkillToCategory(Long categoryId, Long skillId) {
+        SkillCategory skillCategory = skillCategoryRepository.findById(categoryId)
+            .orElseThrow();
+
+        Skill skill = skillRepository.findById(skillId)
+            .orElseThrow();
+
+        skillCategory.getSkills().add(skill);
+        skill.getSkillCategories().add(skillCategory);
+
+        skillCategoryRepository.save(skillCategory);
+        skillRepository.save(skill);
+
+        return skillCategory;
+    }
+
+    public SkillCategory removeSkillFromCategory(Long categoryId, Long skillId) {
+        SkillCategory skillCategory = skillCategoryRepository.findById(categoryId)
+            .orElseThrow();
+
+        Skill skill = skillRepository.findById(skillId)
+            .orElseThrow();
+
+        skillCategory.getSkills().remove(skill);
+        skill.getSkillCategories().remove(skillCategory);
+
+        skillCategoryRepository.save(skillCategory);
+        skillRepository.save(skill);
+
+        return skillCategory;
+    }
+
+    public List<Skill> addSkillsToCategory(Long categoryId, List<Long> skillIds) {
+        SkillCategory skillCategory = skillCategoryRepository.findById(categoryId)
+            .orElseThrow();
+
+        List<Skill> skills = skillRepository.findAllById(skillIds);
+
+        for (Skill skill : skills) {
+            skillCategory.getSkills().add(skill);
+            skill.getSkillCategories().add(skillCategory);
+        }
+
+        skillCategoryRepository.save(skillCategory);
+        skillRepository.saveAll(skills);
+
+        return skills;
     }
 }
