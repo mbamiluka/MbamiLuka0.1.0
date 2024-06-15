@@ -44,7 +44,7 @@ public class ExperienceService {
         if (experience != null) {
             ExpRole expRole = expRoleRepository.findById(expRoleId).orElse(null);
             if (expRole != null) {
-                //experience.getExpRoles().remove(expRole);
+                experience.getExpRoles().remove(expRole);
                 experienceRepository.save(experience);
             }
         }

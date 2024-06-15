@@ -23,6 +23,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "skill")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +34,7 @@ public class Skill {
     private Date mmStartDate;
     private Date mmEndDate;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToMany
     @JoinTable(name = "skill_category_skill",
             joinColumns = @JoinColumn(name = "skill_id"),

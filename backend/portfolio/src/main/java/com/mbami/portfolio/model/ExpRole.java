@@ -1,5 +1,7 @@
 package com.mbami.portfolio.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -11,8 +13,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -22,14 +27,20 @@ public class ExpRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    private Date startDate; // mmyyyy
+    private Date endDate;
 
-    @ManyToMany(mappedBy = "expRoles", cascade = CascadeType.ALL)
-    private List<Experience> experiences;
+    @ManyToOne
+    @JoinColumn(name = "experience_id") // This column is in the exp_role table.
+    private Experience roleExperience;
+
+    @OneToMany(mappedBy = "achievementExpRole", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Achievement> expRoleAchievements = new ArrayList<>();
 
     public ExpRole() {
     }
 
-    public ExpRole(String name) {
+    public ExpRole(String name, Date startDate, Date endDate) {
         this.name = name;
     }
 
@@ -45,4 +56,35 @@ public class ExpRole {
         this.name = name;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Experience getRoleExperience() {
+        return roleExperience;
+    }
+
+    public void setRoleExperience(Experience roleExperience) {
+        this.roleExperience = roleExperience;
+    }
+
+    public List<Achievement> getExpRoleAchievements() {
+        return expRoleAchievements;
+    }
+
+    public void setExpRoleAchievements(List<Achievement> expRoleAchievements) {
+        this.expRoleAchievements = expRoleAchievements;
+    }
 }

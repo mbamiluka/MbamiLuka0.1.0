@@ -12,7 +12,7 @@ import com.mbami.portfolio.service.SkillCategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/skillCategories")
+@RequestMapping("/api/v1/skillCategory")
 public class SkillCategoryController {
 
     private final SkillCategoryService skillCategoryService;
@@ -35,6 +35,12 @@ public class SkillCategoryController {
     @PostMapping
     public ResponseEntity<SkillCategory> addSkillCategory(@RequestBody SkillCategory skillCategory) {
         return new ResponseEntity<>(skillCategoryService.addSkillCategory(skillCategory), HttpStatus.CREATED);
+    }
+
+    // add a list of SkillCategories
+    @PostMapping("/batch")
+    public ResponseEntity<List<SkillCategory>> addSkillCategories(@RequestBody List<SkillCategory> skillCategories) {
+        return new ResponseEntity<>(skillCategoryService.addSkillCategories(skillCategories), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

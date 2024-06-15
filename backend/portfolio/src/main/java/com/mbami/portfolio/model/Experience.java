@@ -39,14 +39,8 @@ public class Experience {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "achievementExperience")
     private List<Achievement> expAchievements;
 
-    @ManyToMany
-    @JoinTable(
-        name = "experience_exp_role",
-        joinColumns = @JoinColumn(name = "experience_id"), // Column name for Experience
-        inverseJoinColumns = @JoinColumn(name = "exp_role_id") // Column name for ExpRole
-    )
-    private Set<ExpRole> expRoles = new HashSet<>();
-
+    @OneToMany(mappedBy = "roleExperience", cascade = CascadeType.ALL)
+    private Set<ExpRole> experienceRoles = new HashSet<>();
 
     public Experience() {
     }
@@ -114,18 +108,18 @@ public class Experience {
     }
 
     public Set<ExpRole> getExpRoles() {
-        return expRoles;
+        return experienceRoles;
     }
 
     public void setExpRoles(Set<ExpRole> expRoles) {
-        this.expRoles = expRoles;
+        this.experienceRoles = expRoles;
     }
 
     public void addExpRole(ExpRole expRole) {
-        expRoles.add(expRole);
+        experienceRoles.add(expRole);
     }
 
     public void removeExpRole(ExpRole expRole) {
-        expRoles.remove(expRole);
+        experienceRoles.remove(expRole);
     }
 }

@@ -17,5 +17,8 @@ response had a stack overflow error (recusive call).
 - Solved by using @JsonManagedReference  and  @JsonBackReference  annotations.
 
 
-x Mormalizing the DB schema to reduce redundancy and improve performance
-uo to 4NF. 
+x Normalizing the DB schema to reduce redundancy and improve performance
+uo to 4NF.
+
+x Note: After schema has been initialized first time,
+you cant change the schema without dropping the tables.
