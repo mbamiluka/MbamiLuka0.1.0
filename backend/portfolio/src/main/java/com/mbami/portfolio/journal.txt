@@ -22,3 +22,5 @@ uo to 4NF.
 
 x Note: After schema has been initialized first time,
 you cant change the schema without dropping the tables.
+
+x note: with css p .className doesnt work, use p.className instead.
