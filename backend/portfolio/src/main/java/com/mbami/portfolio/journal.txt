@@ -24,3 +24,20 @@ x Note: After schema has been initialized first time,
 you cant change the schema without dropping the tables.
 
 x note: with css p .className doesnt work, use p.className instead.
+
+Implemeteing Right sidebar: Thought of using a separate component for the
+right sidebar, but it would be an overkill. Hence, decided to use a
+one component for the right sidebar and used the children prop to
+render the content of the right sidebar. Also, used different
+components for the children of different routes. Used fallback
+component for the side image. (Used defaultImg || fallbackImg)
+
+discovered inner box shadows
+
+discovered applying a style for dark mode only. In other words, applying
+styles for different themes/modes.
+Example:
+/* Inner shadow for dark mode */
+[data-theme="dark"] .workContainer {
+  box-shadow: inset 0px 0px 2.5rem var(--shadow-color);
+}
