@@ -41,3 +41,7 @@ Example:
 [data-theme="dark"] .workContainer {
   box-shadow: inset 0px 0px 2.5rem var(--shadow-color);
 }
+
+you can actually use your css variables in your jsx inline styles
+Example:
+<div style={{ boxShadow: `inset 0px 0px 2.5rem var(--shadow-color)` }}>
