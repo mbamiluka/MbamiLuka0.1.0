@@ -3,6 +3,7 @@ package com.mbami.portfolio.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.mbami.portfolio.service.ExperienceService;
 
 @RestController
 @RequestMapping("api/v1/experience")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ExperienceController {
     private final ExperienceService experienceService;
 
@@ -42,7 +44,7 @@ public class ExperienceController {
         experienceService.deleteExperience(id);
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public Experience updateExperience(@PathVariable int id, @RequestBody Experience experience) {
         return experienceService.addExperience(experience);
     }

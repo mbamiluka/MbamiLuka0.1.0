@@ -47,3 +47,19 @@ Example:
 <div style={{ boxShadow: `inset 0px 0px 2.5rem var(--shadow-color)` }}>
 
 avoiding prop drilling by using context api
+
+@CrossOrigin(origins = "http://localhost:3000") to allow requests from
+the frontend to the backend.
+
+Cannot read properties of undefined (reading 'map') 
+TypeError: Cannot read properties of undefined (reading 'map')
+*This can happen if an array in a response is not initialized yet
+and you try to use it
+SOLUTION: Check if the array is initialized before using it.
+{experience.expRoles && Array.isArray(experience.expRoles) && experience.expRoles.map((role, index) =>
+
+issue: one of the fields in ProjectContent entity was called 'order'
+Everytime the application started it created all other tables except
+the ProjectContent table. This was because 'order' is a reserved keyword
+in SQL. Hence, the table was not created. To solve this, I changed the
+field name from 'order' to 'contentOrder'.
