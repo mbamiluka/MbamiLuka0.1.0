@@ -3,6 +3,7 @@ package com.mbami.portfolio.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mbami.portfolio.model.ExpRole;
@@ -20,6 +22,7 @@ import com.mbami.portfolio.service.ExperienceService;
 
 @RestController
 @RequestMapping("api/v1/experience")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ExperienceController {
     private final ExperienceService experienceService;
 
@@ -28,8 +31,12 @@ public class ExperienceController {
     }
 
     @GetMapping
-    public List<Experience> getAllExperiences() {
-        return experienceService.getAllExperiences();
+    public List<Experience> getExperiences(@RequestParam(required = false) String expType) {
+        if (expType != null && !expType.isEmpty()) {
+            return experienceService.getExperiencesByExpType(expType);
+        } else {
+            return experienceService.getAllExperiences();
+        }
     }
 
     @PostMapping
@@ -42,11 +49,10 @@ public class ExperienceController {
         experienceService.deleteExperience(id);
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public Experience updateExperience(@PathVariable int id, @RequestBody Experience experience) {
         return experienceService.addExperience(experience);
     }
-
 
     @GetMapping("/{id}")
     public boolean isExperienceExist(@RequestBody long id) {
@@ -68,13 +74,14 @@ public class ExperienceController {
     public ExpRole addExpRole(@RequestBody ExpRole expRole) {
         return experienceService.addExpRole(expRole);
     }
-    // ------------ Experience Achievement ---------------------
-
+    
     @DeleteMapping("/{experienceId}/role/{roleId}")
     public ResponseEntity<Void> deleteExpRole(@PathVariable long experienceId, @PathVariable long roleId) {
         experienceService.deleteExpRole(experienceId, roleId);
         return ResponseEntity.ok().build();
     }
+
+    // ------------ Experience Achievement ---------------------
 
     @PostMapping("/{experienceId}/achievement")
     public ResponseEntity<Experience> addAchievement(@PathVariable long experienceId, @RequestBody Achievement achievement) {
@@ -97,5 +104,4 @@ public class ExperienceController {
     public ResponseEntity<List<Achievement>> getAllAchievements(@PathVariable long experienceId) {
         return ResponseEntity.ok(experienceService.getAllAchievements(experienceId));
     }
-    
 }

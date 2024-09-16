@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mbami.portfolio.repository.ExperienceRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import com.mbami.portfolio.model.Achievement;
 import com.mbami.portfolio.model.ExpRole;
+import com.mbami.portfolio.model.ExpType;
 import com.mbami.portfolio.model.Experience;
 import com.mbami.portfolio.repository.ExpRoleRepository;
-import com.mbami.portfolio.model.Achievement;
+import com.mbami.portfolio.repository.ExpTypeRepository;
 import com.mbami.portfolio.repository.AchievementRepository;
 
 @Service
@@ -19,12 +23,14 @@ public class ExperienceService {
     private final ExperienceRepository experienceRepository;
     private final ExpRoleRepository expRoleRepository;
     private final AchievementRepository achievementRepository;
+    private final ExpTypeRepository expTypeRepository;
 
     public ExperienceService(ExperienceRepository experienceRepository, ExpRoleRepository expRoleRepository,
-            AchievementRepository achievementRepository) {
+            AchievementRepository achievementRepository, ExpTypeRepository expTypeRepository) {
         this.experienceRepository = experienceRepository;
         this.expRoleRepository = expRoleRepository;
         this.achievementRepository = achievementRepository;
+        this.expTypeRepository = expTypeRepository;
     }
 
     public ExperienceRepository getExperienceRepository() {
@@ -62,23 +68,56 @@ public class ExperienceService {
         return experienceRepository.findAll();
     }
 
+    public List<Experience> getExperiencesByExpType(String type) {
+        ExpType expType = expTypeRepository.findByName(type);
+        if (expType != null) {
+            return experienceRepository.findByExpType(expType);
+        }
+
+        System.out.println("ExpType not found: " + type);
+        return new ArrayList<>();
+    }
+
+    @Transactional
     public List<ExpRole> getAllExpRoles() {
         return expRoleRepository.findAll();
     }
 
     //get experience by id
+    @Transactional
     public Experience getExperience(long id) {
         return experienceRepository.findById(id).orElse(null);
     }
 
     //get expRole by id
+    @Transactional
     public ExpRole getExpRole(long id) {
         return expRoleRepository.findById(id).orElse(null);
     }
 
-    //save experience
+    @Transactional
     public void saveExperience(Experience experience) {
+        ExpType expType = experience.getExpType();
+        if (expType != null) {
+            if (expType.getId() == 0) {
+                ExpType existingExpType = expTypeRepository.findByName(expType.getName());
+                if (existingExpType != null) {
+                    expType = existingExpType; // Use the existing ExpType if found by name
+                } else {
+                    expType = expTypeRepository.save(expType); // Save the new ExpType if not found
+                }
+                experience.setExpType(expType); // Set the ExpType back to the Experience
+            }
+        }
         experienceRepository.save(experience);
+    }
+
+    @Transactional
+    public void saveExpTypeWithExperiences(ExpType expType) {
+        for (Experience experience : expType.getExperiences()) {
+            experience.setExpType(expType);
+        }
+        expTypeRepository.save(expType);
     }
 
     //save expRole
@@ -101,6 +140,10 @@ public class ExperienceService {
 
     // create experience
     public Experience addExperience(Experience experience) {
+        ExpType expType = expTypeRepository.findById(experience.getExpType().getId())
+                .orElseThrow(() -> new EntityNotFoundException("ExpType not found with id: " + experience.getExpType().getId()));
+        experience.setExpType(expType);
+
         return experienceRepository.save(experience);
     }
 
@@ -170,4 +213,5 @@ public class ExperienceService {
         }
         return null;
     }
+
 }

@@ -9,12 +9,11 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -22,7 +21,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -35,6 +33,9 @@ public class Experience {
     private Date startDate; // mmyyyy
     private Date endDate;
     private String logo; // e.g. url
+
+    @ManyToOne
+    private ExpType expType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "achievementExperience")
     private List<Achievement> expAchievements;
@@ -121,5 +122,13 @@ public class Experience {
 
     public void removeExpRole(ExpRole expRole) {
         experienceRoles.remove(expRole);
+    }
+
+    public ExpType getExpType() {
+        return expType;
+    }
+
+    public void setExpType(ExpType expType) {
+        this.expType = expType;
     }
 }
