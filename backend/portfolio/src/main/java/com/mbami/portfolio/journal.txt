@@ -63,3 +63,23 @@ Everytime the application started it created all other tables except
 the ProjectContent table. This was because 'order' is a reserved keyword
 in SQL. Hence, the table was not created. To solve this, I changed the
 field name from 'order' to 'contentOrder'.
+
+issue: The project content was not being fetched from the DB.
+This was because after dockerizing the application, the RDS DB was not
+granting access to the application. Hence, the deployment to cloud run was
+failing. 
+To solve this, I added the IP address of the cloud run service
+to the RDS security group. This allowed the cloud run service to access
+the RDS DB. Also, I put a little too much trust in AI and did not check
+the pom.xml. MySql driver was removed from the dependencies.
+
+issue: app was failing to fetch secret from GCP Secret Manager. Did some
+digging and found out that the service account used by the cloud run
+service did not have the required permissions to access the secret. Also, 
+I needed to setup GOOGLE_APPLICATION_CREDENTIALS in environment variables. The better
+alternative was to gcloud auth application-default login. This would set the credentials
+for the service account in the environment variables, less hassle.
+
+@counter-style for making custom li counters
+
+due to time, installing collapsible and not self-Implemeteing

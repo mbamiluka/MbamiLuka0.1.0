@@ -32,7 +32,6 @@ public class Skill {
     private Date mmStartDate;
     private Date mmEndDate;
 
-    //@JsonManagedReference
     @ManyToMany
     @JoinTable(name = "skill_category_skill",
             joinColumns = @JoinColumn(name = "skill_id"),
