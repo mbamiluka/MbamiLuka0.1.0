@@ -1,0 +1,13 @@
+{
+  "body": {
+    "content": "eyJ1c2VybmFtZSI6ICJtbHVrYSIsCiJwYXNzd29yZCI6ICJwYXNzMTIzIgp9",
+    "file": false,
+    "fileSize": false
+  },
+  "headers": {
+    "content-type": "application/json"
+  },
+  "method": "POST",
+  "title": "Auth",
+  "url": "http://localhost:8080/auth/signin"
+}

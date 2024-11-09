@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mbami.portfolio.dto.CreateProjectDto;
 import com.mbami.portfolio.model.Project;
 import com.mbami.portfolio.model.ProjectContent;
 import com.mbami.portfolio.service.ProjectService;
@@ -33,8 +35,8 @@ public class ProjectController {
     }
 
     @PostMapping
-    public Project addProject(@RequestBody Project project) {
-        return projectService.addProject(project);
+    public Project addProject(@RequestHeader("Authorization") String token, @RequestBody CreateProjectDto project) {
+        return projectService.addProject(token, project);
     }
 
     @GetMapping("/{id}")

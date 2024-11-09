@@ -6,13 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.mbami.portfolio.model.SkillCategory;
-import com.mbami.portfolio.repository.SkillCategoryRepository;
+import com.mbami.portfolio.security.jwt.JwtUtil;
 import com.mbami.portfolio.service.SkillCategoryService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/skillCategory")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SkillCategoryController {
 
     private final SkillCategoryService skillCategoryService;
@@ -22,8 +25,11 @@ public class SkillCategoryController {
         this.skillCategoryService = skillCategoryService;
     }
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @GetMapping
-    public ResponseEntity<List<SkillCategory>> getAllSkillCategories() {
+    public ResponseEntity<HashMap<String, SkillCategory>> getAllSkillCategories() {
         return new ResponseEntity<>(skillCategoryService.getAllSkillCategories(), HttpStatus.OK);
     }
 
@@ -53,5 +59,10 @@ public class SkillCategoryController {
     public ResponseEntity<SkillCategory> updateSkillCategory(@RequestBody SkillCategory skillCategory) {
         return new ResponseEntity<>(skillCategoryService.updateSkillCategory(skillCategory), HttpStatus.OK);
     }
+
+    /* public ResponseEntity<?> addCategoryToSkill(@RequestHeader("Authorization") String token, Long skillId, Long categoryId) {
+        String username = jwtUtil.extractUsername(token);
+        return new ResponseEntity<>(skillCategoryService.addSkillCategory(username, skillId, categoryId), HttpStatus.OK);
+    } */
 
 }

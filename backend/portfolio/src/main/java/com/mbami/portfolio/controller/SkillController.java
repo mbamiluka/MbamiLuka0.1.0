@@ -4,23 +4,41 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import com.mbami.portfolio.model.Skill;
 import com.mbami.portfolio.model.SkillCategory;
+import com.mbami.portfolio.model.User;
+import com.mbami.portfolio.security.jwt.JwtUtil;
+import com.mbami.portfolio.service.SkillCategoryService;
 import com.mbami.portfolio.service.SkillService;
+import com.mbami.portfolio.service.UserService;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/skills")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SkillController {
 
     private final SkillService skillService;
+    private final UserService userService;
+    private final SkillCategoryService skillCategoryService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public SkillController(SkillService skillService) {
+    public SkillController(SkillService skillService,
+            UserService userService, SkillCategoryService skillCategory, 
+            JwtUtil jwtUtil) {
         this.skillService = skillService;
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
+        this.skillCategoryService = skillCategory;
     }
 
     @GetMapping
@@ -34,8 +52,9 @@ public class SkillController {
     }
 
     @PostMapping
-    public ResponseEntity<Skill> addSkill(@RequestBody Skill skill) {
-        return new ResponseEntity<>(skillService.addSkill(skill), HttpStatus.CREATED);
+    public ResponseEntity<Skill> addSkill(@RequestHeader("Authorization") String tokn, 
+            @RequestBody Skill skill) {
+        return new ResponseEntity<>(skillService.addSkill(tokn, skill), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -55,8 +74,9 @@ public class SkillController {
     }
 
     @PostMapping("/{id}/categories")
-    public ResponseEntity<Skill> addSkillCategory(@PathVariable Long id, @RequestBody SkillCategory skillCategory) {
-        return new ResponseEntity<>(skillService.addSkillCategory(id, skillCategory), HttpStatus.CREATED);
+    public ResponseEntity<Skill> addSkillCategory(@RequestHeader("Authorization") String token, Long id, Long skillCategoryId) {
+        String username = jwtUtil.extractUsername(token);
+        return new ResponseEntity<Skill>(skillService.addSkillCategory(username, id, skillCategoryId), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}/categories")

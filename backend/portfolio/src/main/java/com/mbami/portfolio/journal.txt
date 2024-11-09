@@ -83,3 +83,5 @@ for the service account in the environment variables, less hassle.
 @counter-style for making custom li counters
 
 due to time, installing collapsible and not self-Implemeteing
+
+Implemeted createUser, findByUser, and passwordEncoder in the UserService

@@ -1,0 +1,14 @@
+{
+  "body": {
+    "content": "eyJuYW1lIjogImpzIiwKIm1tU3RhcnREYXRlIjogbnVsbCwKIm1tRW5kRGF0ZSI6bnVsbAp9",
+    "file": false,
+    "fileSize": false
+  },
+  "headers": {
+    "content-type": "application/json",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbHVrYSIsImlhdCI6MTcyODc2NDIxNywiZXhwIjoxNzI4NzY2MDE3fQ.ZHBLAQjuhpwdcVy4rUBbbhtQIxs4cktDJM6MXiO-xWc"
+  },
+  "method": "POST",
+  "title": "Add skill",
+  "url": "http://localhost:8080/api/v1/skills"
+}

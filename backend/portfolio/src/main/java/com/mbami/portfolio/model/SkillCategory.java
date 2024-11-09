@@ -1,9 +1,7 @@
 package com.mbami.portfolio.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -24,9 +22,11 @@ public class SkillCategory {
     private Long id;
     private String name;
 
-    ///@JsonBackReference
     @ManyToMany(mappedBy = "skillCategories", cascade = CascadeType.ALL)
     private Set<Skill> categorySkills;
+
+    @ManyToMany(mappedBy = "projectCategories", cascade = CascadeType.ALL)
+    private Set<Project> categoryProjects;
 
     public SkillCategory() {
     }

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -13,12 +14,9 @@ import jakarta.persistence.OneToMany;
 
 import jakarta.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -36,7 +34,6 @@ public class Project {
     private String demo;
     private String image;
     private String type; // personal, group, university, company
-    private String category; // web, mobile, desktop, game
     private String status; // ongoing, completed
 
     @ManyToOne
@@ -44,15 +41,21 @@ public class Project {
 
     @ManyToMany
     private List<Skill> projectSkills;
+
+    @ManyToMany
+    private List<SkillCategory> projectCategories = new ArrayList<SkillCategory>();
     
     @OneToMany(mappedBy = "contentProject", cascade = CascadeType.ALL)
     private List<ProjectContent> projectContents;
+
+    @ManyToMany(mappedBy = "expRoleProjects", cascade = CascadeType.ALL)
+    private List<ExpRole> projectExpRoles;
 
     public Project() {
     }
 
     public Project(Long id, String name, String description, LocalDate start, LocalDate end, String sourceCode, String demo,
-            String image, String type, String category, String status) {
+            String image, String type, List<SkillCategory> projectSkillCateg, String status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -62,7 +65,7 @@ public class Project {
         this.demo = demo;
         this.image = image;
         this.type = type;
-        this.category = category;
+        this.projectCategories = projectSkillCateg;
         this.status = status;
     }
 
@@ -138,12 +141,12 @@ public class Project {
         this.type = type;
     }
 
-    public String getCategory() {
-        return category;
+    public List<SkillCategory> getProjectCategories() {
+        return projectCategories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setProjectCategories(List<SkillCategory> category) {
+        this.projectCategories = category;
     }
 
     public String getStatus() {
@@ -176,5 +179,13 @@ public class Project {
 
     public void setProjectContents(List<ProjectContent> projectContents) {
         this.projectContents = projectContents;
+    }
+
+    public List<ExpRole> getProjectExpRoles() {
+        return projectExpRoles;
+    }
+
+    public void setProjectExpRoles(List<ExpRole> projectExpRoles) {
+        this.projectExpRoles = projectExpRoles;
     }
 }
