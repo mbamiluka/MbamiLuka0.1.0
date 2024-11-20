@@ -15,14 +15,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ExpType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "expType")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "expType")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Experience> expTypeExperiences;
 
     public ExpType() {

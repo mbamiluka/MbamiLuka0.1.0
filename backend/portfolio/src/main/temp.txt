@@ -3,15 +3,18 @@ import Select from 'react-select';
 import Tag from '../atoms/Tag';
 
 const AddProject = () => {
-    const [msg, setMsg] = useState('');
     const [skills, setSkills] = useState([]);
+    const [selectedSkills, setSelectedSkills] = useState([]);
+    const [error, setError] = useState('');
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [msg, setMsg] = useState('');
     const [categories, setCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const [experiences, setExperiences] = useState([]);
     const [expRoles, setExpRoles] = useState([]);
-    const [selectedSkills, setSelectedSkills] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedExperience, setSelectedExperience] = useState(null);
     const [selectedExpRoles, setSelectedExpRoles] = useState([]);
+    const [selectedExperience, setSelectedExperience] = useState(null);
+
     let token = localStorage.getItem('token');
 
     useEffect(() => {
@@ -62,11 +65,15 @@ const AddProject = () => {
     }, [token]);
 
     const handleSkillChange = (selectedOptions) => {
-        setSelectedSkills(selectedOptions);
+        setSelectedSkills(selectedOptions.map(option => ({ id: option.value })));
     };
 
     const handleCategoryChange = (selectedOptions) => {
-        setSelectedCategories(selectedOptions);
+        setSelectedCategories(selectedOptions.map(option => ({ id: option.value })));
+    };
+
+    const handleExperienceChange = (selectedOption) => {
+        setSelectedExperience({ id: selectedOption.value });
     };
 
     const handleExpRoleChange = (selectedOptions) => {
@@ -76,18 +83,28 @@ const AddProject = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
+        const name = formData.get('name');
+        const description = formData.get('description');
+        const start = formData.get('start');
+        const end = formData.get('end');
+        const demo = formData.get('demo');
+        const sourceCode = formData.get('sourceCode');
+        const image = formData.get('image');
+        const type = formData.get('type');
+        const status = formData.get('status');
+
         const project = {
-            name: formData.get('name'),
-            description: formData.get('description'),
-            start: formData.get('start'),
-            end: formData.get('end'),
-            demo: formData.get('demo'),
-            sourceCode: formData.get('sourceCode'),
-            image: formData.get('image'),
-            type: formData.get('type'),
-            status: formData.get('status'),
-            skills: selectedSkills.map(option => option.value),
-            categories: selectedCategories.map(option => option.value),
+            name,
+            description,
+            start,
+            end,
+            demo,
+            sourceCode,
+            image,
+            type,
+            status,
+            skills: selectedSkills,
+            categories: selectedCategories,
             projectExperience: selectedExperience,
             projectExpRoles: selectedExpRoles
         };
@@ -203,7 +220,7 @@ const AddProject = () => {
                 <label>Project Experience:</label>
                 <div>
                     <Select
-                        onChange={(option) => setSelectedExperience(option.value)}
+                        onChange={handleExperienceChange}
                         options={experiences}
                         placeholder="Select experience..."
                         styles={{

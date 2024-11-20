@@ -9,5 +9,5 @@ import com.mbami.portfolio.model.ExpRole;
 
 public interface ExpRoleRepository extends JpaRepository<ExpRole, Long> {
 
-    ExpRole findByName(String name);
+    List<ExpRole> findByName(String name);
 }

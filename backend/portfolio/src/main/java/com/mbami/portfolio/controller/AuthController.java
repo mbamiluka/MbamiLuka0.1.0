@@ -75,11 +75,12 @@ public class AuthController {
     }
 
     @GetMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestParam String token, @RequestParam String username) throws Exception {
-        UserDetails user = userService.loadUserByUsername(username);
+    public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String token) {
+        token = token.substring(7);
 
-        boolean isValid = jwtUtil.validateToken(token, user);
-        return ResponseEntity.ok(isValid);
+        User user = userService.loadUserByUsername(jwtUtil.extractUsername(token));
+        boolean res = jwtUtil.validateToken(token, user);
+        return ResponseEntity.ok(res);
     }
 
     /* @PostMapping("/logout")

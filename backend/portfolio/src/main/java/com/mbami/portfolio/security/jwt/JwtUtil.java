@@ -21,7 +21,7 @@ public class JwtUtil {
     private static final Logger logger = Logger.getLogger(JwtUtil.class.getName());
 
     // Replace this with a secure key in a real application, ideally fetched from environment variables
-    public static final String SECRET = "2a1257746c4425ffb46ef4979f0a08781a5082459921202ec84c9464cca70c1a88ed73c9a3b5780e8355b1ee427bbe5ba77b7925f357759c169f6116c9ad5a796d07b45514378ae303cf237f12d56262d5beb8aaff0fb8ce9452498ce6cb2a45dcc27168594615e02b81e4439ff7a26fa5619ae2a74067298845b22db5ec70caaf0d60071ba7d2cfde631f7651ea0cf2495a9ca29ff2c8f8e178ffbc95ca53abed46b7e079cd336bac0c921dc44e2c60c6020fdfe0b33958a238478b61539b4eb84eff2a7c833c4a2ab361575f64cd47a279ceccd8fc831aa84aaab88923eb860f1e75b465dfa255d5e0a275bf5977da5eb228a763aeae5671ffff1c982885f5";
+    public static final String SECRET = System.getenv("MBAMI_PORTFOLIO_JWT_SECRET");
 
     // Generate token with given user name
     public String generateToken(String userName) {
@@ -39,7 +39,7 @@ public class JwtUtil {
                     .setClaims(claims)
                     .setSubject(userName)
                     .setIssuedAt(new Date())
-                    .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // Token valid for 30 minutes
+                    .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60*3)) // Token valid for 60 minutes
                     .signWith(getSignKey(), SignatureAlgorithm.HS256)
                     .compact();
             logger.info("Token created successfully: " + token);

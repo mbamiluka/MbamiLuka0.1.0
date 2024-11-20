@@ -85,3 +85,8 @@ for the service account in the environment variables, less hassle.
 due to time, installing collapsible and not self-Implemeteing
 
 Implemeted createUser, findByUser, and passwordEncoder in the UserService
+
+Sometimes if the relation(OneToMany, ManyToOne) is too complex, it is better to
+use a DTO to map the response to the frontend. This is because the response
+might have a circular reference and the frontend might not be able to handle it, giving
+issues like stack overflow error on the server

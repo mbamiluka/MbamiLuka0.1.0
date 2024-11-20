@@ -97,18 +97,18 @@ public class ExperienceService {
 
     @Transactional
     public void saveExperience(Experience experience) {
-        ExpType expType = experience.getExpType();
-        if (expType != null) {
-            if (expType.getId() == 0) {
-                ExpType existingExpType = expTypeRepository.findByName(expType.getName());
-                if (existingExpType != null) {
-                    expType = existingExpType; // Use the existing ExpType if found by name
-                } else {
-                    expType = expTypeRepository.save(expType); // Save the new ExpType if not found
-                }
-                experience.setExpType(expType); // Set the ExpType back to the Experience
-            }
+        if(experience.getInstitution() == null) {
+            throw new IllegalArgumentException("Experience institution cannot be null");
         }
+        
+        if(experienceRepository.findByInstitution(experience.getInstitution()) != null) {
+            throw new IllegalArgumentException("Experience with institution " + experience.getInstitution() + " already exists");
+        }
+
+        if(experience.getExpType() == null) {
+            throw new IllegalArgumentException("Experience must have a type. E.g. education, work, etc.");
+        }
+
         experienceRepository.save(experience);
     }
 

@@ -35,7 +35,7 @@ public class ExpRoleController {
     }
 
     @GetMapping("/name/{name}")
-    public ExpRole getExpRoleByName(String name) {
+    public List<ExpRole> getExpRoleByName(String name) {
         return expRoleService.getExpRoleByName(name);
     }
 

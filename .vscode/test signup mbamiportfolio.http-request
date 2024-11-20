@@ -8,6 +8,6 @@
     "content-type": "application/json"
   },
   "method": "POST",
-  "title": "test reqs",
+  "title": "test signup",
   "url": "http://localhost:8080/auth/signup"
 }
