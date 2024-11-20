@@ -5,11 +5,16 @@ import com.mbami.portfolio.model.SkillCategory;
 import com.mbami.portfolio.repository.SkillCategoryRepository;
 import com.mbami.portfolio.repository.SkillRepository;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SkillCategoryService {
@@ -22,8 +27,15 @@ public class SkillCategoryService {
         this.skillRepository = skillRepository;
     }
 
-    public List<SkillCategory> getAllSkillCategories() {
-        return skillCategoryRepository.findAll();
+    public HashMap<String, SkillCategory> getAllSkillCategories() {
+        List<SkillCategory> skillCategoryList = skillCategoryRepository.findAll();
+        HashMap<String, SkillCategory> uniqueSkillCategories = new HashMap<>();
+
+        for (SkillCategory skillCategory : skillCategoryList) {
+            uniqueSkillCategories.put(skillCategory.getName(), skillCategory);
+        }
+
+        return uniqueSkillCategories;
     }
 
     public Optional<SkillCategory> getSkillCategoryById(Long id) {
@@ -31,6 +43,13 @@ public class SkillCategoryService {
     }
 
     public SkillCategory addSkillCategory(SkillCategory skillCategory) {
+        String name=skillCategory.getName().toLowerCase().trim();
+        skillCategory.setName(name);
+
+        skillCategoryRepository.findByName(name).ifPresent(existingSkillCategory -> {
+            throw new IllegalStateException("Skill Category with name " + name + " already exists");
+        });
+
         return skillCategoryRepository.save(skillCategory);
     }
 
@@ -103,4 +122,19 @@ public class SkillCategoryService {
 
         return skills;
     }
+
+    /* public ResponseEntity<?> addCategoryToSkill(String username, Long skillId, long categoryId) {
+        SkillCategory skillCategory = skillCategoryRepository.findById(categoryId)
+            .orElseThrow();
+        
+        Optional<Skill> skill = skillRepository.findById(skillId);
+
+        skillCategory.getSkills().add(skill.get());
+        skill.getSkillCategories().add(skillCategory);
+
+        skillCategoryRepository.save(skillCategory);
+        skillRepository.save(skill);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    } */
 }

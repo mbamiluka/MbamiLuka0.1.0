@@ -27,7 +27,7 @@ public class Achievement {
     private String achievementUrl; // e.g. url
     private Date startDate;
     private Date endDate;
-    // status: ongoing, completed, etc.
+    private String achievementType; // e.g. certification, award, degree, etc.
 
     @ManyToOne
     private Experience achievementExperience;

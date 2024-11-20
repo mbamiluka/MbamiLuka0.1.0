@@ -1,0 +1,13 @@
+{
+  "body": {
+    "content": "eyJ1c2VybmFtZSI6Im1sdWthIiwgCiJwYXNzd29yZCI6ICJwYXNzMTIzIiwKImZOYW1lIjoiTWJhbWkiLAogImxOYW1lIjoiTHVrZSIsCiAgImVtYWlsIjoibWxAZ21haWwuY29tIiwKICAicGFzc3dvcmQiOiJwYXNzMTIzIiwKICAiYXV0aFJvbGUiOiAiYWRtaW4iLAogICJpc0FjdGl2ZSI6dHJ1ZQp9",
+    "file": false,
+    "fileSize": false
+  },
+  "headers": {
+    "content-type": "application/json"
+  },
+  "method": "POST",
+  "title": "test signup",
+  "url": "http://localhost:8080/auth/signup"
+}

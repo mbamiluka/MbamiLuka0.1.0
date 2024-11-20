@@ -84,7 +84,11 @@ public class AchievementService {
     }
 
     public List<Achievement> getAchievementsByExpRoleName(String expRoleName) {
-        return expRoleRepository.findByName(expRoleName).getExpRoleAchievements();
+        List<ExpRole> expRoles = expRoleRepository.findByName(expRoleName);
+        if (expRoles.isEmpty()) {
+            return null;
+        }
+        return expRoles.get(0).getExpRoleAchievements();
     }
 
     public List<Achievement> addAchievementsToExpRole(long expRoleId, List<Achievement> achievements) {
