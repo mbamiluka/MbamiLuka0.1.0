@@ -12,10 +12,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class ProjectContent {
+public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private String contentType;
     private String content;
     private int contentOrder;
@@ -23,10 +24,10 @@ public class ProjectContent {
     @ManyToOne
     private Project contentProject;
 
-    public ProjectContent() {
+    public Content() {
     }
     
-    public ProjectContent(Long id, String contentType, String content) {
+    public Content(Long id, String contentType, String content) {
         this.id = id;
         this.contentType = contentType;
         this.content = content;
@@ -38,6 +39,14 @@ public class ProjectContent {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContentType() {

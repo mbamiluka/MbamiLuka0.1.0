@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mbami.portfolio.dto.CreateProjectDto;
 import com.mbami.portfolio.model.Project;
-import com.mbami.portfolio.model.ProjectContent;
+import com.mbami.portfolio.model.Content;
 import com.mbami.portfolio.service.ProjectService;
 
 @RestController
@@ -56,7 +56,7 @@ public class ProjectController {
 
     // In ProjectController class
     @PostMapping("/{projectId}/content")
-    public ResponseEntity<ProjectContent> addProjectContent(@PathVariable Long projectId, @RequestBody ProjectContent content) {
+    public ResponseEntity<Content> addProjectContent(@PathVariable Long projectId, @RequestBody Content content) {
         return projectService.addContent(projectId, content);
     }
 }
