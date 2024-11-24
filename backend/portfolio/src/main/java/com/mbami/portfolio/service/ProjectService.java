@@ -14,13 +14,13 @@ import com.mbami.portfolio.dto.CreateProjectDto;
 import com.mbami.portfolio.model.ExpRole;
 import com.mbami.portfolio.model.Experience;
 import com.mbami.portfolio.model.Project;
-import com.mbami.portfolio.model.ProjectContent;
+import com.mbami.portfolio.model.Content;
 import com.mbami.portfolio.model.Skill;
 import com.mbami.portfolio.model.SkillCategory;
 import com.mbami.portfolio.model.User;
 import com.mbami.portfolio.repository.ExpRoleRepository;
 import com.mbami.portfolio.repository.ExperienceRepository;
-import com.mbami.portfolio.repository.ProjectContentRepository;
+import com.mbami.portfolio.repository.ContentRepository;
 import com.mbami.portfolio.repository.ProjectRepository;
 import com.mbami.portfolio.repository.SkillCategoryRepository;
 import com.mbami.portfolio.repository.SkillRepository;
@@ -30,7 +30,7 @@ import com.mbami.portfolio.security.jwt.JwtUtil;
 @Service
 public class ProjectService {
     private final ProjectRepository projectRepository;
-    private final ProjectContentRepository projectContentRepository;
+    private final ContentRepository projectContentRepository;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final SkillCategoryRepository skillCategoryRepository;
@@ -39,7 +39,7 @@ public class ProjectService {
     private final ExpRoleRepository expRoleRepository;
 
     public ProjectService(ProjectRepository projectRepository,
-            ProjectContentRepository projectContentRepository,
+            ContentRepository projectContentRepository,
             JwtUtil jwtUtil, UserRepository userRepository,
             SkillRepository skillRepository, SkillCategoryRepository skillCategoryRepository,
             ExperienceRepository experienceRepository, ExpRoleRepository expRoleRepository) {
@@ -151,7 +151,7 @@ public class ProjectService {
         projectRepository.deleteAll();
     }
 
-    public ResponseEntity<ProjectContent> addContent(long projectId, ProjectContent projectContent) {
+    public ResponseEntity<Content> addContent(long projectId, Content projectContent) {
         Project project = projectRepository.findById(projectId).orElse(null);
         if (project != null) {
             projectContent.setContentProject(project);
@@ -161,10 +161,10 @@ public class ProjectService {
         return ResponseEntity.notFound().build();
     }
 
-    public ProjectContent getContent(long projectId, long contentId) {
+    public Content getContent(long projectId, long contentId) {
         Project project = projectRepository.findById(projectId).orElse(null);
         if (project != null) {
-            ProjectContent projectContent = projectContentRepository.findById(contentId).orElse(null);
+            Content projectContent = projectContentRepository.findById(contentId).orElse(null);
             if (projectContent != null) {
                 return projectContent;
             }
@@ -172,7 +172,7 @@ public class ProjectService {
         return null;
     }
 
-    public List<ProjectContent> getAllContentsByProjectId(Long projectId) {
+    public List<Content> getAllContentsByProjectId(Long projectId) {
         return projectContentRepository.findByContentProjectId(projectId);
     }
 }

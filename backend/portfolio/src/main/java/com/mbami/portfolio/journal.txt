@@ -89,4 +89,11 @@ Implemeted createUser, findByUser, and passwordEncoder in the UserService
 Sometimes if the relation(OneToMany, ManyToOne) is too complex, it is better to
 use a DTO to map the response to the frontend. This is because the response
 might have a circular reference and the frontend might not be able to handle it, giving
-issues like stack overflow error on the server
+issues like stack overflow error on the server. So you need to use a DTO, or JsonBackReference
+over JsonIdentityInfo
+
+challenge: I had to implement a featue where the admin can add content for a project.
+The content can be text, image, video, link, or code, and can be added in any order. The content should be
+previewable. 
+Solution: I created an ImageService & Controller class to handle the image upload and retrieval from Cloudinary & the DB.
+And then a Content model, service, and controller to handle the content creation and retrieval. The content

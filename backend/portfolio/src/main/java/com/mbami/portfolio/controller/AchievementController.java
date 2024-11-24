@@ -3,6 +3,7 @@ package com.mbami.portfolio.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,6 +19,7 @@ import com.mbami.portfolio.service.SkillService;
 
 @RestController
 @RequestMapping("api/v1/achievement")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AchievementController {
     private final AchievementService achievementService;
     private final SkillService skillService;

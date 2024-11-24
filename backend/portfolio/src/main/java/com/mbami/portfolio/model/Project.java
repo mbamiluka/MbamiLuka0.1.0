@@ -46,7 +46,7 @@ public class Project {
     private List<SkillCategory> projectCategories = new ArrayList<SkillCategory>();
     
     @OneToMany(mappedBy = "contentProject", cascade = CascadeType.ALL)
-    private List<ProjectContent> projectContents;
+    private List<Content> projectContents;
 
     @ManyToMany(mappedBy = "expRoleProjects", cascade = CascadeType.ALL)
     private List<ExpRole> projectExpRoles;
@@ -173,11 +173,11 @@ public class Project {
         this.projectSkills = projectSkills;
     }
 
-    public List<ProjectContent> getProjectContents() {
+    public List<Content> getProjectContents() {
         return projectContents;
     }
 
-    public void setProjectContents(List<ProjectContent> projectContents) {
+    public void setProjectContents(List<Content> projectContents) {
         this.projectContents = projectContents;
     }
 
