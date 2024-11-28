@@ -1,0 +1,3 @@
+[submodule "mbami_portfolio_frontend"]
+	path = mbami_portfolio_frontend
+	url = https://github.com/mbamiluka/mbami_portfolio_frontend.git
