@@ -97,3 +97,5 @@ The content can be text, image, video, link, or code, and can be added in any or
 previewable. 
 Solution: I created an ImageService & Controller class to handle the image upload and retrieval from Cloudinary & the DB.
 And then a Content model, service, and controller to handle the content creation and retrieval. The content
+
+Issue: After deploying to cloud railway, the app was
