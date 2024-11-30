@@ -21,7 +21,7 @@ import com.mbami.portfolio.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://mbamiluka-65b99.web.app")
 public class AuthController {
 
     @Autowired
