@@ -12,7 +12,6 @@ import com.mbami.portfolio.service.SkillCategoryService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/skillCategory")
@@ -30,16 +29,8 @@ public class SkillCategoryController {
     private JwtUtil jwtUtil;
 
     @GetMapping
-    public ResponseEntity<HashMap<String, Object>> getAllSkillCategories() {
-        HashMap<String, SkillCategory> skillCategories = skillCategoryService.getAllSkillCategories();
-        HashMap<String, Object> response = new HashMap<>();
-        
-        // Ensure no null keys are present
-        response.put("skillCategories", skillCategories.values().stream()
-            .filter(skillCategory -> skillCategory.getId() != null)
-            .collect(Collectors.toList()));
-        
-        return ResponseEntity.ok(response);
+    public ResponseEntity<HashMap<String, SkillCategory>> getAllSkillCategories() {
+        return new ResponseEntity<>(skillCategoryService.getAllSkillCategories(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
