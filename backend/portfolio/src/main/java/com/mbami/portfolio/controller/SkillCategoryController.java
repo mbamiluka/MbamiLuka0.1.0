@@ -12,10 +12,11 @@ import com.mbami.portfolio.service.SkillCategoryService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/skillCategory")
-@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
+@CrossOrigin(origins = {"https://mbamiluka-65b99.web.app/", "https://mbamiluka-65b99.firebaseapp.com/"})
 public class SkillCategoryController {
 
     private final SkillCategoryService skillCategoryService;
@@ -30,7 +31,15 @@ public class SkillCategoryController {
 
     @GetMapping
     public ResponseEntity<HashMap<String, SkillCategory>> getAllSkillCategories() {
-        return new ResponseEntity<>(skillCategoryService.getAllSkillCategories(), HttpStatus.OK);
+        List<SkillCategory> skillCategories = (List<SkillCategory>) skillCategoryService.getAllSkillCategories();
+        HashMap<String, SkillCategory> response = new HashMap<>();
+        
+        // Ensure no null keys are present
+        response.put("skillCategories", (SkillCategory) skillCategories.stream()
+            .filter(skillCategory -> skillCategory.getId() != null)
+            .collect(Collectors.toList()));
+        
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
