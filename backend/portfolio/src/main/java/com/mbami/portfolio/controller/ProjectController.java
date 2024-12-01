@@ -20,7 +20,7 @@ import com.mbami.portfolio.model.Content;
 import com.mbami.portfolio.service.ProjectService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
 @RequestMapping("/api/v1/project")
 public class ProjectController {
     private final ProjectService projectService;

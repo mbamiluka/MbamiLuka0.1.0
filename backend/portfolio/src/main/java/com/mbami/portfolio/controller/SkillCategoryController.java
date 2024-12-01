@@ -15,7 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/skillCategory")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
 public class SkillCategoryController {
 
     private final SkillCategoryService skillCategoryService;

@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/contents")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
 public class ContentController {
 
     private final ContentService service;
