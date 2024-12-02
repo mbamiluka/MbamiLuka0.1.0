@@ -30,14 +30,15 @@ public class SkillCategoryController {
     private JwtUtil jwtUtil;
 
     @GetMapping
-    public ResponseEntity<HashMap<String, SkillCategory>> getAllSkillCategories() {
-        List<SkillCategory> skillCategories = (List<SkillCategory>) skillCategoryService.getAllSkillCategories();
-        HashMap<String, SkillCategory> response = new HashMap<>();
+    public ResponseEntity<HashMap<String, List<SkillCategory>>> getAllSkillCategories() {
+        HashMap<String, SkillCategory> skillCategoriesMap = skillCategoryService.getAllSkillCategories();
+        HashMap<String, List<SkillCategory>> response = new HashMap<>();
         
         // Ensure no null keys are present
-        response.put("skillCategories", (SkillCategory) skillCategories.stream()
+        List<SkillCategory> skillCategories = skillCategoriesMap.values().stream()
             .filter(skillCategory -> skillCategory.getId() != null)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+        response.put("skillCategories", skillCategories);
         
         return ResponseEntity.ok(response);
     }
