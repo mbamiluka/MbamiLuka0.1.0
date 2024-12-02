@@ -106,3 +106,9 @@ To solve this, I added a NonNull constraint to the skill category name.
 And also a filter to remove null values from the response.
 And then removed the null values from the DB.
 Challenge: finding the error thorugh logs & digging through codebase to correct it.
+
+Issue: The admin was not able to add long text content to an achievement.
+My task was to implement a feature where the admin can add a long text content to an achievement.
+Action: I investigated the issue and found out that the text was being cut off after a certain length.
+This was because the text field in the DB was of type varchar(255). Hence, it was cutting off the text after 255 characters.
+To solve this, I used the Column annotation to specify the length of the text field in the DB.
