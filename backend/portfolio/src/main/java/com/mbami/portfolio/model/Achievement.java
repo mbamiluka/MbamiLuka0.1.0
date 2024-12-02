@@ -22,8 +22,10 @@ public class Achievement {
     private Long id;
     
     private String achievementDescr;
+
     @Column(length = 500)
     private String achievementFullDescr;
+
     private String achievementLogo; // e.g. url
     private String achievementTitle;
     private String achievementUrl; // e.g. url

@@ -61,6 +61,7 @@ public class ProjectService {
         token = token.substring(7);
         String username = jwtUtil.extractUsername(token);
         User user = userRepository.findByUsername(username).orElse(null);
+
         List<SkillCategory> validCategories = new ArrayList<>();
         List<Skill> validSkills = new ArrayList<>();
         Experience validExperience = experienceRepository.findByInstitution(project.getProjectExperience().getInstitution());
