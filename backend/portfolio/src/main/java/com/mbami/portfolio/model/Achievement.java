@@ -6,6 +6,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Achievement {
     private Long id;
     
     private String achievementDescr;
+    @Column(length = 500)
     private String achievementFullDescr;
     private String achievementLogo; // e.g. url
     private String achievementTitle;
