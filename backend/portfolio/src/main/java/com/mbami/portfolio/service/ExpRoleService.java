@@ -43,7 +43,7 @@ public class ExpRoleService {
                 throw new IllegalArgumentException("Role already exists");
             }
         }
-        expRole.setName(expRole.getName().toLowerCase().trim());
+        expRole.setName(expRole.getName().trim());
         return expRoleRepository.save(expRole);
     }
 
