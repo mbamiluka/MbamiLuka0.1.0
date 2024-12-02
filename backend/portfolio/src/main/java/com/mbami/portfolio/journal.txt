@@ -98,4 +98,11 @@ previewable.
 Solution: I created an ImageService & Controller class to handle the image upload and retrieval from Cloudinary & the DB.
 And then a Content model, service, and controller to handle the content creation and retrieval. The content
 
-Issue: After deploying to cloud railway, the app was
+Issue: After deploying the spring boot server to the cloud (railway), the app was failing the build
+
+Issue: with server filing to return skill categories.
+This was because there were some rows rows that had null keys.
+To solve this, I added a NonNull constraint to the skill category name.
+And also a filter to remove null values from the response.
+And then removed the null values from the DB.
+Challenge: finding the error thorugh logs & digging through codebase to correct it.
