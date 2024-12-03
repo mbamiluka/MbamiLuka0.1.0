@@ -13,6 +13,8 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToMany;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -42,7 +44,11 @@ public class Project {
     @ManyToMany
     private List<Skill> projectSkills;
 
-    @ManyToMany
+    @JoinTable(
+        name = "project_project_categories",
+        joinColumns = @JoinColumn(name = "project_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private List<SkillCategory> projectCategories = new ArrayList<SkillCategory>();
     
     @OneToMany(mappedBy = "contentProject", cascade = CascadeType.ALL)
