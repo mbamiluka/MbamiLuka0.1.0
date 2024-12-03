@@ -44,8 +44,9 @@ public class Project {
     @ManyToMany
     private List<Skill> projectSkills;
 
+    @ManyToMany
     @JoinTable(
-        name = "project_project_categories",
+        name = "project_categories",
         joinColumns = @JoinColumn(name = "project_id"),
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
