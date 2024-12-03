@@ -45,11 +45,6 @@ public class Project {
     private List<Skill> projectSkills;
 
     @ManyToMany
-    @JoinTable(
-        name = "project_categories",
-        joinColumns = @JoinColumn(name = "project_id"),
-        inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
     private List<SkillCategory> projectCategories = new ArrayList<SkillCategory>();
     
     @OneToMany(mappedBy = "contentProject", cascade = CascadeType.ALL)
