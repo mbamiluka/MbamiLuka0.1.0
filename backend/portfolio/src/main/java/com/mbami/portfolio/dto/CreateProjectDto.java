@@ -20,7 +20,7 @@ public class CreateProjectDto {
     private String status;
     private List<Long> skillIds;
     private List<Long> categoryIds;
-    private Experience projectExperience;
+    private CreateExperienceDto projectExperience;
     private List<ExpRole> projectExpRoles;
 
     public CreateProjectDto() {
@@ -28,7 +28,7 @@ public class CreateProjectDto {
 
     public CreateProjectDto(String name, String description, LocalDate start, LocalDate end, String sourceCode, String demo,
             String image, String type, String status, List<Long> skillIds, List<Long> categoryIds,
-            Experience projectExperience, List<ExpRole> projectExpRoles) {
+            CreateExperienceDto projectExperience, List<ExpRole> projectExpRoles) {
         this.name = name;
         this.description = description;
         this.start = start;
@@ -132,11 +132,11 @@ public class CreateProjectDto {
         this.categoryIds = categoryIds;
     }
 
-    public Experience getProjectExperience() {
+    public CreateExperienceDto getProjectExperience() {
         return projectExperience;
     }
 
-    public void setProjectExperience(Experience projectExperience) {
+    public void setProjectExperience(CreateExperienceDto projectExperience) {
         this.projectExperience = projectExperience;
     }
 
