@@ -41,8 +41,8 @@ public class Skill {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<SkillCategory> skillCategories;
 
-    /* @ManyToMany(mappedBy = "projectSkills")
-    private Set<Project> skillProjects; */
+    @ManyToMany(mappedBy = "projectSkills")
+    private Set<Project> skillProjects;
 
     public Skill() {
     }
