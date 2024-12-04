@@ -35,8 +35,8 @@ public class ExpRole {
     @OneToMany(mappedBy = "achievementExpRole", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Achievement> expRoleAchievements = new ArrayList<>();
 
-    @ManyToMany
-    List<Project> expRoleProjects = new ArrayList<>();
+    /* @ManyToMany
+    List<Project> expRoleProjects = new ArrayList<>(); */
 
     public ExpRole() {
     }

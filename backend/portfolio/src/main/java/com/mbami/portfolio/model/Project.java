@@ -61,8 +61,8 @@ public class Project {
     @OneToMany(mappedBy = "contentProject", cascade = CascadeType.ALL)
     private List<Content> projectContents;
 
-    @ManyToMany(mappedBy = "expRoleProjects", cascade = CascadeType.ALL)
-    private List<ExpRole> projectExpRoles;
+    /* @ManyToMany(mappedBy = "expRoleProjects", cascade = CascadeType.ALL)
+    private List<ExpRole> projectExpRoles; */
 
     public Project() {
     }
@@ -194,11 +194,11 @@ public class Project {
         this.projectContents = projectContents;
     }
 
-    public List<ExpRole> getProjectExpRoles() {
+    /* public List<ExpRole> getProjectExpRoles() {
         return projectExpRoles;
     }
 
     public void setProjectExpRoles(List<ExpRole> projectExpRoles) {
         this.projectExpRoles = projectExpRoles;
-    }
+    } */
 }

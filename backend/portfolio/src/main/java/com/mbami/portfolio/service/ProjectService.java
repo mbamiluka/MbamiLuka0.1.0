@@ -114,7 +114,7 @@ public class ProjectService {
         newProject.setProjectSkills(validSkills);
         newProject.setStatus(project.getStatus());
         newProject.setProjectExperience(validExperience);
-        newProject.setProjectExpRoles(validExpRoles);
+        //newProject.setProjectExpRoles(validExpRoles);
 
         return projectRepository.save(newProject);
     }
