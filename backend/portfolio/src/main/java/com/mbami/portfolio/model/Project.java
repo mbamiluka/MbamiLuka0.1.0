@@ -42,7 +42,12 @@ public class Project {
     private Experience projectExperience;
 
     @ManyToMany
-    private List<Skill> projectSkills;
+    @JoinTable(
+        name = "project_project_skills",
+        joinColumns = @JoinColumn(name = "project_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name = "skill_id", nullable = false)
+    )
+    private List<Skill> projectSkills = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

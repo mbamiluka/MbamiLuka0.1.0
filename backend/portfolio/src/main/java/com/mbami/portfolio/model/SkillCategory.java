@@ -27,7 +27,7 @@ public class SkillCategory {
     @ManyToMany(mappedBy = "skillCategories", cascade = CascadeType.ALL)
     private Set<Skill> categorySkills;
 
-    @ManyToMany(mappedBy = "projectCategories", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "projectCategories")
     private Set<Project> categoryProjects;
 
     public SkillCategory() {
