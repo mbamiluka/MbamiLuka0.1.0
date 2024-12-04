@@ -7,7 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToMany;
@@ -43,7 +45,7 @@ public class Project {
     private Experience projectExperience;
 
     @ManyToMany
-    private List<Skill> projectSkills = new ArrayList<>();
+    private Set<Skill> projectSkills = new HashSet<Skill>();
 
     @ManyToMany
     private List<SkillCategory> projectCategories = new ArrayList<>();
@@ -169,11 +171,11 @@ public class Project {
     }
 
     public List<Skill> getProjectSkills() {
-        return projectSkills;
+        return (List<Skill>) projectSkills; //
     }
 
     public void setProjectSkills(List<Skill> projectSkills) {
-        this.projectSkills = projectSkills;
+        this.projectSkills = (Set<Skill>) projectSkills; //
     }
 
     public List<Content> getProjectContents() {
