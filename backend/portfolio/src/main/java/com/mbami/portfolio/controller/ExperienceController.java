@@ -22,7 +22,7 @@ import com.mbami.portfolio.service.ExperienceService;
 
 @RestController
 @RequestMapping("api/v1/experience")
-@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
+@CrossOrigin(origins = {"https://mbamiluka-65b99.web.app/", "https://mbamiluka-65b99.firebaseapp.com/", "http://localhost:3000"})
 public class ExperienceController {
     private final ExperienceService experienceService;
 

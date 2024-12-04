@@ -23,7 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/skills")
-@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
+@CrossOrigin(origins = {"https://mbamiluka-65b99.web.app/", "https://mbamiluka-65b99.firebaseapp.com/", "http://localhost:3000"})
 public class SkillController {
 
     private final SkillService skillService;

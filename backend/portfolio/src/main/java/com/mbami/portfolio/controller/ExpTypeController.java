@@ -20,7 +20,7 @@ import com.mbami.portfolio.service.ExpTypeService;
 
 @RestController
 @RequestMapping("api/v1/expType")
-@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
+@CrossOrigin(origins = {"https://mbamiluka-65b99.web.app/", "https://mbamiluka-65b99.firebaseapp.com/", "http://localhost:3000"})
 public class ExpTypeController {
     private final ExpTypeService expTypeService;
 

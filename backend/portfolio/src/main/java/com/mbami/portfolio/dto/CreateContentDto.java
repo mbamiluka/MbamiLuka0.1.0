@@ -1,6 +1,7 @@
 package com.mbami.portfolio.dto;
 
 public class CreateContentDto {
+    private Long id;
     private String name;
     private String contentType;
     private String content;

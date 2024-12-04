@@ -21,7 +21,7 @@ import com.mbami.portfolio.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "https://mbamiluka-65b99.web.app")
+@CrossOrigin(origins = {"https://mbamiluka-65b99.web.app/", "https://mbamiluka-65b99.firebaseapp.com/", "http://localhost:3000"})
 public class AuthController {
 
     @Autowired

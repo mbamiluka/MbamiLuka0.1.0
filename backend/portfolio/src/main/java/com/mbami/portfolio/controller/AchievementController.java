@@ -19,7 +19,7 @@ import com.mbami.portfolio.service.SkillService;
 
 @RestController
 @RequestMapping("api/v1/achievement")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"https://mbamiluka-65b99.web.app/", "https://mbamiluka-65b99.firebaseapp.com/", "http://localhost:3000"})
 public class AchievementController {
     private final AchievementService achievementService;
     private final SkillService skillService;

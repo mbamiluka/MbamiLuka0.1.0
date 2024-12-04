@@ -9,6 +9,7 @@ import com.mbami.portfolio.model.Skill;
 import com.mbami.portfolio.model.SkillCategory;
 
 public class CreateProjectDto {
+    private Long id;
     private String name;
     private String description; 
     private LocalDate start;
@@ -26,9 +27,10 @@ public class CreateProjectDto {
     public CreateProjectDto() {
     }
 
-    public CreateProjectDto(String name, String description, LocalDate start, LocalDate end, String sourceCode, String demo,
+    public CreateProjectDto(Long id, String name, String description, LocalDate start, LocalDate end, String sourceCode, String demo,
             String image, String type, String status, List<Long> skillIds, List<Long> categoryIds,
             CreateExperienceDto projectExperience, List<ExpRole> projectExpRoles) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.start = start;

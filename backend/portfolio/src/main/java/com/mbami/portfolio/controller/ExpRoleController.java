@@ -16,7 +16,7 @@ import com.mbami.portfolio.service.ExpRoleService;
 
 @RestController
 @RequestMapping("api/v1/expRole")
-@CrossOrigin(origins = "https://mbamiluka-65b99.web.app/")
+@CrossOrigin(origins = {"https://mbamiluka-65b99.web.app/", "https://mbamiluka-65b99.firebaseapp.com/", "http://localhost:3000"})
 public class ExpRoleController {
     private final ExpRoleService expRoleService;
 

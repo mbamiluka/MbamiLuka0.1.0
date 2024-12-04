@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CreateExperienceDto {
+    private Long id;
     private String institution;
     private Date startDate;
     private Date endDate;

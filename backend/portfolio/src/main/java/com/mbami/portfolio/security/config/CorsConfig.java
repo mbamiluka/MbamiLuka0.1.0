@@ -15,6 +15,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("https://mbamiluka-65b99.web.app/");
         config.addAllowedOrigin("https://mbamiluka-65b99.firebaseapp.com/");
+        config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
