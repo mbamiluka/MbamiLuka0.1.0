@@ -29,8 +29,9 @@ import jakarta.persistence.Table;
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private Long id;
+    
+    @NonNull
     private String name;
     private Date mmStartDate;
     private Date mmEndDate;
