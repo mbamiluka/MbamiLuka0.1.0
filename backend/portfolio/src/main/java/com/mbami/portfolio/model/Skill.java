@@ -30,16 +30,13 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NonNull
     private String name;
     private Date mmStartDate;
     private Date mmEndDate;
 
     @ManyToMany
-    @JoinTable(name = "skill_category_skill",
-            joinColumns = @JoinColumn(name = "skill_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<SkillCategory> skillCategories;
 
     @ManyToMany(mappedBy = "projectSkills")
