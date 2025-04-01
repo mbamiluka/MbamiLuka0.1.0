@@ -16,6 +16,7 @@ public class CorsConfig {
         config.addAllowedOrigin("https://mbamiluka-65b99.web.app/");
         config.addAllowedOrigin("https://mbamiluka-65b99.firebaseapp.com/");
         config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("https://mbamiluka0-1-0.onrender.com");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
