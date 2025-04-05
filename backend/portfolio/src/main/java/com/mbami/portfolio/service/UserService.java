@@ -58,14 +58,6 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    @Transactional
-    public String changeForgottenPassword(String username, String newPassword) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
-        user.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(user);
-        return "Password changed successfully";
-    }
 
     @Transactional
     public void deleteUser(Long userId) {

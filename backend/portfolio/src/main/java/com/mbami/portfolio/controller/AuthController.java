@@ -83,6 +83,27 @@ public class AuthController {
         return ResponseEntity.ok(res);
     }
 
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        if (email == null || email.isEmpty()) {
+            return ResponseEntity.badRequest().body("Email is required");
+        }
+        // Logic to handle password reset (e.g., sending a reset link to the email)
+        return ResponseEntity.ok("Password reset link sent to " + email);
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> request) {
+        String token = request.get("token");
+        String newPassword = request.get("newPassword");
+        if (token == null || newPassword == null) {
+            return ResponseEntity.badRequest().body("Token and new password are required");
+        }
+        // Logic to reset the password using the token
+        return ResponseEntity.ok("Password has been reset successfully");
+    }
+
     /* @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, @RequestHeader("Authorization") String token) {
         // Invalidate the token
