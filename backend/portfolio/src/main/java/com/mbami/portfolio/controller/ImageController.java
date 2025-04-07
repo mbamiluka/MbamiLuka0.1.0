@@ -41,4 +41,24 @@ public class ImageController {
             return ResponseEntity.status(500).body("Image deletion failed");
         }
     }
+
+    @GetMapping("/{publicId}")
+    public ResponseEntity<Map<String, String>> getImage(@PathVariable String publicId) {
+        try {
+            Map<String, String> response = imageService.getImage(publicId);
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Image retrieval failed"));
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Map<String, String>> getAllImages() {
+        try {
+            Map<String, String> response = imageService.getAllImages();
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Image retrieval failed"));
+        }
+    }
 }

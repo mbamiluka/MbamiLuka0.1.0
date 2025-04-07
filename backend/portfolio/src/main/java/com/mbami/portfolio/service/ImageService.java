@@ -41,4 +41,28 @@ public class ImageService {
     public void deleteImage(String publicId) throws IOException {
         cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
     }
+
+    public Map<String, String> getImage(String publicId) throws IOException {
+        Map<String, String> response = new HashMap<>();
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> result = (Map<String, Object>) cloudinary.api().resource(publicId, ObjectUtils.emptyMap());
+            response.put("url", (String) result.get("url"));
+        } catch (Exception e) {
+            throw new IOException("Failed to fetch image resource", e);
+        }
+        return response;
+    }
+
+    public Map<String, String> getAllImages() throws IOException {
+        Map<String, String> response = new HashMap<>();
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> result = (Map<String, Object>) cloudinary.api().resources(ObjectUtils.emptyMap());
+            response.put("resources", result.toString());
+        } catch (Exception e) {
+            throw new IOException("Failed to fetch all images", e);
+        }
+        return response;
+    }
 }
