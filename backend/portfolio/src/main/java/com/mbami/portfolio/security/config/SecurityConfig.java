@@ -31,7 +31,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserService(null, null); // Ensure UserInfoService implements UserDetailsService
+        return new UserService(null, null); // Ensure UserService implements UserDetailsService
     }
 
     @Bean
@@ -39,10 +39,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless APIs
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/signup", "/auth/signin","/error",
-                    "/api/**").permitAll()
-                //.requestMatchers("/auth/user/**").hasAuthority("ROLE_USER")
-                //.requestMatchers("/auth/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/auth/signup", "/auth/signin", "/error", "/api/**", "/health").permitAll()
                 .anyRequest().authenticated() // Protect all other endpoints
             )
             .sessionManagement(sess -> sess
